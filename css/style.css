@@ -32,10 +32,20 @@ form {
   box-shadow:0px 0px 5px green;
 } 
 
+.myInput:invalid:not(:placeholder-shown) + .error-text {
+  display: block;
+} 
 .myInput:invalid:not(:placeholder-shown) {
   border: 1px solid red;
 } 
+
+
 .myInput:invalid:focus:not(:placeholder-shown) {
   border: 1px solid red;
   box-shadow:0px 0px 5px red;
 } 
+
+.error-text {
+  display: none;
+  color: red;
+}
