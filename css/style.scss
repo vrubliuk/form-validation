@@ -1,13 +1,35 @@
 h1 {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
+
 form {
   max-width: 600px;
+  padding: 20px;
+  border-radius: 20px;
 }
+
+.html5form {
+  background-color: rgb(250, 250, 250);
+}
+
 .form-group {
   margin-bottom: 0px;
 }
+
+.checkbox {
+  margin: 0;
+}
+
+.required {
+  color: red;
+}
+
+input,
+select {
+  opacity: 0.5;
+}
+
 .myInput {
   display: block;
   height: 36px;
@@ -17,43 +39,84 @@ form {
   border-radius: 4px;
   border: 1px solid grey;
 }
+
 .mySubmit {
   margin-top: 20px;
+  opacity: 0.5;
 }
+
 .icon-success {
   color: green;
   display: none;
 }
+
 .icon-error {
   color: red;
   display: none;
 }
-.myInput:focus {
+
+.myInput:focus,
+.mySelect:focus {
   border: 1px solid dodgerblue;
-  box-shadow:0px 0px 5px dodgerblue;
+  box-shadow: 0px 0px 5px dodgerblue;
 }
+
 .error-text {
   visibility: hidden;
   color: red;
 }
-.myInput:valid:not(:focus) {
+
+.myInput:valid:not(:focus):not([value=""]) {
   border: 1px solid green;
 }
-.myInput:valid:not(:focus) ~ .icon-success {
-  display: block;
-}
-.myInput:invalid:not(:focus):not([value=""]) {
-  border: 1px solid red;
-}
-.myInput:invalid:not(:focus):not([value=""]) ~ .icon-error  {
+
+.myInput:valid:not(:focus):not([value=""])~.icon-success {
   display: block;
 }
 
-.myInput:invalid:not(:focus):not([value=""]) ~ .error-text {
+.myInput:invalid:not(:focus):not([value=""]) {
+  border: 1px solid red;
+}
+
+.myInput:invalid:not(:focus):not([value=""])~.icon-error {
+  display: block;
+}
+
+.myInput:invalid:not(:focus):not([value=""])~.error-text {
   visibility: visible;
 }
 
 ::placeholder {
-  opacity: 0.4;
+  opacity: 0.9;
 }
 
+.dateOfBirth {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.myLable {
+  color: rgb(51, 51, 51);
+  font-weight: bolder;
+  margin-bottom: 5px;
+}
+
+.month,
+.day,
+.year {
+  width: 32.85%;
+  display: inline-block;
+}
+
+.mySelect {
+  height: 36px;
+  border: 1px solid grey;
+}
+
+.mySelect:valid:not(:focus) {
+  border: 1px solid green;
+}
+
+option:first-child {
+  display: none;
+}
