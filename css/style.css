@@ -124,6 +124,7 @@ select {
   margin-bottom: 5px; }
 
 .justifyContainer {
+  text-align: justify;
   -moz-text-align-last: justify;
   text-align-last: justify; }
 
