@@ -1,4 +1,4 @@
 document.getElementById("click").onclick = function () {
-  var x = document.getElementById("").value;
+  var x = document.getElementById("test").value;
   alert (x);
 };

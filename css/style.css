@@ -13,10 +13,12 @@ h1 {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 100vh; }
+  min-height: 100vh;
+  min-width: 640px; }
 
 form {
   max-width: 600px;
+  min-width: 300px;
   padding: 20px;
   border-radius: 20px;
   display: inline-block;
@@ -27,21 +29,19 @@ form {
 .html5form {
   background-color: #fafafa;
   background-color: #f2f2f2; }
-  .html5form option {
-    background-color: #f2f2f2; }
 
 .jsform {
   background-color: #282c34;
   color: #8b98a5; }
   .jsform .myLable {
     color: #8b98a5; }
-  .jsform option {
-    background-color: #939599; }
 
 .firstName,
 .lastName {
-  width: 49.6%;
-  display: inline-block; }
+  width: 49%;
+  display: inline-block;
+  -moz-text-align-last: auto;
+  text-align-last: auto; }
 
 .form-group {
   margin-bottom: 0px; }
@@ -123,10 +123,14 @@ select {
   font-weight: bolder;
   margin-bottom: 5px; }
 
+.justifyContainer {
+  -moz-text-align-last: justify;
+  text-align-last: justify; }
+
 .month,
 .day,
 .year {
-  width: 32.85%;
+  width: 32.3%;
   display: inline-block; }
 
 .mySelect {

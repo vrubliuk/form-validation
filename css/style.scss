@@ -9,10 +9,12 @@ h1 {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  min-width: 640px;
 }
 
 form {
   max-width: 600px;
+  min-width: 300px;
   padding: 20px;
   border-radius: 20px;
   display: inline-block;
@@ -24,9 +26,6 @@ form {
 .html5form {
   background-color: rgb(250, 250, 250);
   background-color: #f2f2f2; 
-  option {
-    background-color:  #f2f2f2;
-  }
 }
 
 .jsform {
@@ -35,15 +34,13 @@ form {
   .myLable {
     color: rgb(139, 152, 165);
   } 
-  option {
-    background-color:  rgb(147, 149, 153);
-  }
 }
 
 .firstName,
   .lastName {
-    width: 49.6%;
+    width: 49%;
    display: inline-block;
+   text-align-last: auto;
   }
 
 .form-group {
@@ -97,6 +94,7 @@ select {
 .error-text {
   visibility: hidden;
   color: red;
+
 }
 
 .myInput:valid:not(:focus):not([value=""]),
@@ -136,10 +134,13 @@ select {
   margin-bottom: 5px;
 }
 
+.justifyContainer {
+    text-align-last: justify; 
+}
 .month,
 .day,
 .year {
-  width: 32.85%;
+  width: 32.3%; 
   display: inline-block;
 }
 
