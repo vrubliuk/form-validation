@@ -3,15 +3,48 @@ h1 {
   margin-bottom: 20px;
 }
 
+.myContainer {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 form {
   max-width: 600px;
   padding: 20px;
   border-radius: 20px;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: left;
 }
 
 .html5form {
   background-color: rgb(250, 250, 250);
+  background-color: #f2f2f2; 
+  option {
+    background-color:  #f2f2f2;
+  }
 }
+
+.jsform {
+  background-color: rgb(40, 44, 52);
+  color: rgb(139, 152, 165);
+  .myLable {
+    color: rgb(139, 152, 165);
+  } 
+  option {
+    background-color:  rgb(147, 149, 153);
+  }
+}
+
+.firstName,
+  .lastName {
+    width: 49.6%;
+   display: inline-block;
+  }
 
 .form-group {
   margin-bottom: 0px;
@@ -66,9 +99,11 @@ select {
   color: red;
 }
 
-.myInput:valid:not(:focus):not([value=""]) {
+.myInput:valid:not(:focus):not([value=""]),
+.mySelect:valid:not(:focus):not([value=""]) {
   border: 1px solid green;
 }
+
 
 .myInput:valid:not(:focus):not([value=""])~.icon-success {
   display: block;
@@ -111,10 +146,6 @@ select {
 .mySelect {
   height: 36px;
   border: 1px solid grey;
-}
-
-.mySelect:valid:not(:focus) {
-  border: 1px solid green;
 }
 
 option:first-child {

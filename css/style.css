@@ -2,13 +2,46 @@ h1 {
   text-align: center;
   margin-bottom: 20px; }
 
+.myContainer {
+  text-align: center;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 100vh; }
+
 form {
   max-width: 600px;
   padding: 20px;
-  border-radius: 20px; }
+  border-radius: 20px;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: left; }
 
 .html5form {
-  background-color: #fafafa; }
+  background-color: #fafafa;
+  background-color: #f2f2f2; }
+  .html5form option {
+    background-color: #f2f2f2; }
+
+.jsform {
+  background-color: #282c34;
+  color: #8b98a5; }
+  .jsform .myLable {
+    color: #8b98a5; }
+  .jsform option {
+    background-color: #939599; }
+
+.firstName,
+.lastName {
+  width: 49.6%;
+  display: inline-block; }
 
 .form-group {
   margin-bottom: 0px; }
@@ -53,7 +86,8 @@ select {
   visibility: hidden;
   color: red; }
 
-.myInput:valid:not(:focus):not([value=""]) {
+.myInput:valid:not(:focus):not([value=""]),
+.mySelect:valid:not(:focus):not([value=""]) {
   border: 1px solid green; }
 
 .myInput:valid:not(:focus):not([value=""]) ~ .icon-success {
@@ -98,9 +132,6 @@ select {
 .mySelect {
   height: 36px;
   border: 1px solid grey; }
-
-.mySelect:valid:not(:focus) {
-  border: 1px solid green; }
 
 option:first-child {
   display: none; }
