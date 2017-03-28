@@ -16,7 +16,7 @@
       <h1>HTML5 Validation</h1>
       <div class="form-group has-feedback">
         <label for="exampleInputLogin1">Login<span class="required"> *</span></label>
-        <input type="text" class="myInput" id="exampleInputLogin1" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="mickey777"
+        <input type="text" class="myInput" id="exampleInputLogin1" value="" placeholder="mickey777"
           required pattern="[A-Za-zА-Яа-яЁёІіЇїЄє0-9-]+" title="Should contain only letters and numbers">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
@@ -24,7 +24,7 @@
       </div>
       <div class="form-group has-feedback">
         <label for="exampleInputEmail1">Email<span class="required"> *</span></label>
-        <input type="email" class="myInput" id="exampleInputEmail1" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="mickey@gmail.com"
+        <input type="email" class="myInput" id="exampleInputEmail1" value="" placeholder="mickey@gmail.com"
           required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Must be a valid email address">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
@@ -32,16 +32,14 @@
       </div>
       <div class="form-group has-feedback">
         <label for="exampleInputPassword1">Password<span class="required"> *</span></label>
-        <input type="password" class="myInput" id="exampleInputPassword1" onkeyup="this.setAttribute('value', this.value);" value=""
-          placeholder="paSSword22" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input type="password" class="myInput" id="exampleInputPassword1" value="" placeholder="paSSword22" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
         <p class="error-text">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</p>
       </div>
       <div class="form-group has-feedback">
         <label for="exampleInputConfirmPassword1">Confirm Password</label>
-        <input type="password" class="myInput" id="exampleInputConfirmPassword1" onkeyup="this.setAttribute('value', this.value);"
-          value="" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Please type the same password" disabled>
+        <input type="password" class="myInput" id="exampleInputConfirmPassword1" value="" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Please type the same password" disabled>
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
         <p class="error-text">The two passwords are not the same</p>
@@ -49,7 +47,7 @@
       <div class="justifyContainer">
         <div class="form-group has-feedback firstName">
           <label for="exampleInputFirstName1">First Name</label>
-          <input type="text" class="myInput" id="exampleInputFirstName1" onkeyup="this.setAttribute('value', this.value);" value=""
+          <input type="text" class="myInput" id="exampleInputFirstName1" value=""
             placeholder="Mickey" required pattern="[A-Za-zА-Яа-яЁёІіЇїЄє]+" title="Should contain only letters">
           <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
@@ -57,7 +55,7 @@
         </div>
         <div class="form-group has-feedback lastName">
           <label for="exampleInputLastName1">Last Name</label>
-          <input type="text" class="myInput" id="exampleInputLastName1" onkeyup="this.setAttribute('value', this.value);" value=""
+          <input type="text" class="myInput" id="exampleInputLastName1" value=""
             placeholder="Mouse" required pattern="[A-Za-zА-Яа-яЁёІіЇїЄє]+" title="Should contain only letters">
           <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
@@ -66,7 +64,7 @@
       </div>
       <div class="form-group has-feedback">
         <label for="exampleInputPhone1">Phone Number</label>
-        <input type="tel" class="myInput" id="exampleInputPhone1" onkeyup="this.setAttribute('value', this.value);" value="" placeholder="0930000911"
+        <input type="tel" class="myInput" id="exampleInputPhone1" value="" placeholder="0930000911"
           pattern="[0-9]{10}" title="Must be 10 digits phone number">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
@@ -85,8 +83,7 @@
         <p class="myLable" title="Choose date of your birth">Date of Birth</p>
         <div class="justifyContainer">
           <div class="month">
-            <select class="form-control mySelect" name="month1" title="Select a month" onchange="this.setAttribute('value', this.value);"
-              value="">
+            <select class="form-control mySelect" id="month1" name="month1" title="Select a month" value="">
             <option selected value="">month</option>
             <option value="1">January</option>
             <option value="2">February</option>
@@ -103,8 +100,7 @@
           </select>
           </div>
           <div class="day">
-            <select class="form-control mySelect" name="day1" title="Select a day" onchange="this.setAttribute('value', this.value);"
-              value="">
+            <select class="form-control mySelect" id="day1" name="day1" title="Select a day" value="">
             <option value="" selected>day</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -140,8 +136,7 @@
           </select>
           </div>
           <div class="year">
-            <select class="form-control mySelect" name="year1" title="Select a year" onchange="this.setAttribute('value', this.value);"
-              value="">
+            <select class="form-control mySelect" id="year1" name="year1" title="Select a year" value="">
              <option value="" selected>year</option>
             <option value="2001">2001</option>
             <option value="2000">2000</option>
