@@ -56,7 +56,7 @@ input,
 select {
   opacity: 0.5; }
 
-.myInput {
+.myInput, .myInput2, .mySelect, .mySelect2 {
   display: block;
   height: 36px;
   width: 100%;
@@ -133,10 +133,6 @@ select {
 .year {
   width: 32.3%;
   display: inline-block; }
-
-.mySelect {
-  height: 36px;
-  border: 1px solid grey; }
 
 option:first-child {
   display: none; }
