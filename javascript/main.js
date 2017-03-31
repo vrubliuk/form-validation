@@ -22,6 +22,8 @@ function ChangeBorderColorOnFocus() {
   // var x = document.getElementsByClassName("myInput2");
   for (var i = 0; i < x.length - 1; i++) {
     x[i].onfocus = function () {
+      this.classList.remove("error");
+      this.classList.remove("success");
       this.classList.add("onfocus");
     };
     x[i].onblur = function () {
@@ -43,30 +45,53 @@ document.getElementsByClassName("jsform")[0].onsubmit = function () {
 
 
 
-function myInput (type, pattern,  valid, error) {
-  this.type = type;
-  this.myValue = function () {
-    this.myValue = this.value;
-  };
+function myInput (id, pattern, required) {
+  this.id = id;
   this.pattern = pattern;
+  this.required = required;
   this.empty = function () {
-    this.empty = this.value.length > 0 ? true : false;
+    var x = document.getElementById(id);
+    return x.value.length > 0 ? false : true;
+  };
+  this.validate = function () {
+    var x = document.getElementById(id);
+    return this.pattern.test(x.value);
+  };
+  this.showSuccessorError = function () {
+    var x = document.getElementById(id);
+    if (this.validate() === true && this.empty() === false) {
+      
+      x.classList.remove("error");
+      x.classList.add("success");
+    } 
+    else {
+   
+      x.classList.remove("success");
+      x.classList.add("error");
+    }
+  };
+  this.showError = function () {
+    
+  };
+  this.showClear = function () {
+    
   };
 
 }
-var x = document.getElementById("exampleInputLogin2");
 
+var myLogin = document.getElementById("exampleInputLogin2");
+myLogin = new myInput("exampleInputLogin2", /a/);
 
-// x = new myInput();
-
-
-
+document.getElementById("exampleInputLogin2").onblur = function () {
+   myLogin.showSuccessorError();
+};
 
 
 
 //TEST
 document.getElementById("click").onclick = function () {
-  
-  alert(x.value);
+  // alert (myLogin.validate());
+//  alert(x.validate());
+ myLogin.showSuccessorError();
   
 };
