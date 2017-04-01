@@ -91,8 +91,10 @@ function ChangeValue() {
 
 
 //TEST
-// document.getElementById("click").onclick = function () {
-// };
+document.getElementById("click").onclick = function () {
+  var x = document.getElementById("inputPhone2").value;
+  alert(x);
+};
 
 
 function Empty(x) {
@@ -158,6 +160,28 @@ function validate(id, pattern) {
 }
 
 
+//Since there is an issue with IE (it changes value of input to "+38 (___) ___-__-__" after onfocus event, other browsers keep the input clear), this function will be used only for IE
+function validateIE(id, pattern) {
+  var x = document.getElementById(id);
+  var y = pattern;
+  x.onfocus = function () {
+    ShowOnFocus(this);
+  };
+  x.onblur = function () {
+    this.classList.remove("onfocus");
+    var isValid = Validate(this, y);
+    if (isValid) {
+      ShowSuccess(this);
+      return true;
+    } else if (!isValid && (x.value !== "+38 (___) ___-__-__")) {
+      ShowError(this);
+      return false;
+    }
+  };
+}
+
+
+
 function confirm(id1, id2) {
   // id1 = input with initial password
   // id2 = input with confirmation of initial password
@@ -217,8 +241,7 @@ var loginPattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє0-9]+$/;
 var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
 var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 var namePattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/;
-var phonePattern = /^[0-9]{10}$/;
-
+var phonePattern = /^[^_]+$/;
 
 validate("inputLogin2", loginPattern);
 validate("inputEmail2", emailPattern);
@@ -226,7 +249,21 @@ validate("inputPassword2", passwordPattern);
 confirm("inputPassword2", "inputConfirmPassword2");
 validate("inputFirstName2", namePattern);
 validate("inputLastName2", namePattern);
-validate("inputPhone2", phonePattern);
+if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+  validateIE("inputPhone2", phonePattern);
+} else {
+  validate("inputPhone2", phonePattern);
+}
+  
 select("month2");
 select("day2");
 select("year2");
+
+function changePhoneInput () {
+  var phone = [{ "mask": "+38 (###) ###-##-##"}];
+    $('#inputPhone2').inputmask({ 
+        mask: phone, 
+        greedy: false, 
+        definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+}
+changePhoneInput();

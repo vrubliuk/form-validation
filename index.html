@@ -189,7 +189,7 @@
       <h1>JavaScript Validation</h1>
       <div class="form-group has-feedback">
         <label for="inputLogin2">Login<span class="required"> *</span></label>
-        <input type="text" class="myInput2" id="inputLogin2" placeholder="mickey777" pattern="[A-Za-zА-Яа-яЁёІіЇїЄє0-9-]+" title="Should contain only letters and numbers">
+        <input type="text" class="myInput2" id="inputLogin2" placeholder="mickey777"  title="Should contain only letters and numbers">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
         <p class="error-text">Should contain only letters and numbers</p>
@@ -197,21 +197,21 @@
       <div class="form-group has-feedback">
         <label for="inputEmail2">Email<span class="required"> *</span></label>
         <input type="email" class="myInput2" id="inputEmail2" placeholder="mickey@gmail.com"
-           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Must be a valid email address">
+           title="Must be a valid email address">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
         <p class="error-text">Must be a valid email address</p>
       </div>
       <div class="form-group has-feedback">
         <label for="inputPassword2">Password<span class="required"> *</span></label>
-        <input type="password" class="myInput2" id="inputPassword2" placeholder="paSSword22"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+        <input type="password" class="myInput2" id="inputPassword2" placeholder="paSSword22"   title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
         <p class="error-text">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</p>
       </div>
       <div class="form-group has-feedback">
         <label for="inputConfirmPassword2">Confirm Password<span class="required"> *</span></label>
-        <input type="password" class="myInput2" id="inputConfirmPassword2" placeholder="paSSword22"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Please type the same password" disabled>
+        <input type="password" class="myInput2" id="inputConfirmPassword2" placeholder="paSSword22"   title="Please type the same password" disabled>
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
         <p class="error-text">The two passwords are not the same</p>
@@ -219,14 +219,14 @@
       <div class="justifyContainer">
         <div class="form-group has-feedback firstName">
           <label for="inputFirstName2">First Name</label>
-          <input type="text" class="myInput2" id="inputFirstName2" placeholder="Mickey" pattern="[A-Za-zА-Яа-яЁёІіЇїЄє]+" title="Should contain only letters">
+          <input type="text" class="myInput2" id="inputFirstName2" placeholder="Mickey"  title="Should contain only letters">
           <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
           <p class="error-text">Should contain only letters</p>
         </div>
         <div class="form-group has-feedback lastName">
           <label for="inputLastName2">Last Name</label>
-          <input type="text" class="myInput2" id="inputLastName2" placeholder="Mouse" pattern="[A-Za-zА-Яа-яЁёІіЇїЄє]+" title="Should contain only letters">
+          <input type="text" class="myInput2" id="inputLastName2" placeholder="Mouse"  title="Should contain only letters">
           <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
           <p class="error-text">Should contain only letters</p>
@@ -234,11 +234,11 @@
       </div>
       <div class="form-group has-feedback">
         <label for="inputPhone2">Phone Number</label>
-        <input type="tel" class="myInput2" id="inputPhone2" placeholder="0930000911"
-          pattern="[0-9]{10}" title="Must be 10 digits phone number">
+        <input type="tel" class="myInput2" id="inputPhone2" placeholder="+38 (___) ___-__-__"
+           title="Must be 10 digits phone number">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
-        <p class="error-text">Must be 10 digits phone number</p>
+        <p class="error-text">The number is not complete</p>
       </div>
       <div class="radio">
         <p class="myLable" title="Choose your gender">Gender</p>
@@ -539,6 +539,7 @@
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="javascript/main.js"></script>
 </body>
