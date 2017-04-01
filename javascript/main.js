@@ -5,7 +5,7 @@ window.onload = function () {
 // Since placeholder-shown pseudo class doesn't work in IE and Edge, the value of each input will be changed dynamically via JS
 function ChangeValue() {
   var x = document.querySelectorAll("#exampleInputLogin1, #exampleInputEmail1, #exampleInputPassword1, #exampleInputConfirmPassword1, #exampleInputFirstName1, #exampleInputLastName1, #exampleInputPhone1, #month1, #day1, #year1");
-  for (var i = 0; i < x.length - 1; i++) {
+  for (var i = 0; i < x.length; i++) {
     x[i].onchange = function () {
       this.setAttribute('value', this.value);
     };
@@ -90,17 +90,6 @@ function ChangeValue() {
 // }
 
 
-
-// var myLogin = document.getElementById("exampleInputLogin2");
-// myLogin = new myInput("exampleInputLogin2", /a/);
-
-
-// document.getElementById("exampleInputLogin2").onblur = function () {
-//    myLogin.showSuccessorError();
-// };
-
-
-
 //TEST
 // document.getElementById("click").onclick = function () {
 // };
@@ -112,16 +101,24 @@ function Empty(x) {
 
 function Validate(x, pattern) {
   return pattern.test(x.value);
-  // return x.value.match(pattern);
 }
 
-function ClearSuccessError(x) {
+function ShowOnFocus(x) {
   $(x).removeClass("error");
   $(x).removeClass("success");
   $(x).addClass("onfocus");
   $(x).siblings(".icon-error").css("display", "");
   $(x).siblings(".icon-success").css("display", "");
   $(x).siblings(".error-text").css("visibility", "");
+}
+
+function CleanSuccessError(x) {
+  $(x).removeClass("error");
+  $(x).removeClass("success");
+  $(x).siblings(".icon-error").css("display", "");
+  $(x).siblings(".icon-success").css("display", "");
+  $(x).siblings(".error-text").css("visibility", "");
+  x.value = "";
 }
 
 function ShowSuccess(x) {
@@ -144,17 +141,18 @@ function validate(id, pattern) {
   var x = document.getElementById(id);
   var y = pattern;
   x.onfocus = function () {
-    ClearSuccessError(this);
+    ShowOnFocus(this);
   };
   x.onblur = function () {
     this.classList.remove("onfocus");
     var isEmpty = Empty(this);
     var isValid = Validate(this, y);
-    // alert(isValid);
     if (isValid && !isEmpty) {
       ShowSuccess(this);
+      return true;
     } else if (!isValid && !isEmpty) {
       ShowError(this);
+      return false;
     }
   };
 }
@@ -165,8 +163,26 @@ function confirm(id1, id2) {
   // id2 = input with confirmation of initial password
   var x = document.getElementById(id1);
   var y = document.getElementById(id2);
+  x.onkeyup = function () {
+    var xValue = document.getElementById(id1).value;
+    var yValue = document.getElementById(id2).value;
+    var isEmpty = Empty(y);
+    var xValid = Validate(this, passwordPattern);
+    if (xValid) {
+      y.disabled = false;
+      if (yValue === xValue && !isEmpty) {
+        ShowSuccess(y);
+      } else if (yValue !== xValue && !isEmpty) {
+        ShowError(y);
+      }
+    } else {
+      y.disabled = true;
+      y.value = "";
+      CleanSuccessError(y);
+    }
+  };
   y.onfocus = function () {
-    ClearSuccessError(this);
+    ShowOnFocus(this);
   };
   y.onblur = function () {
     this.classList.remove("onfocus");
@@ -181,9 +197,36 @@ function confirm(id1, id2) {
   };
 }
 
+function select(id) {
+  var x = document.getElementById(id);
+  x.onfocus = function () {
+    $(x).removeClass("success");
+    $(x).addClass("onfocus");
+  };
+  x.onblur = function () {
+    $(x).removeClass("onfocus");
+    var isEmpty = Empty(this);
+    if (!isEmpty) {
+      $(x).addClass("success");
+    } 
+  };
+}
 
 
-validate("inputLogin2", /^[A-Za-zА-Яа-яЁёІіЇїЄє0-9]+$/);
-validate("inputEmail2", /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/);
-validate("inputPassword2", /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/);
+var loginPattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє0-9]+$/;
+var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+var namePattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/;
+var phonePattern = /^[0-9]{10}$/;
+
+
+validate("inputLogin2", loginPattern);
+validate("inputEmail2", emailPattern);
+validate("inputPassword2", passwordPattern);
 confirm("inputPassword2", "inputConfirmPassword2");
+validate("inputFirstName2", namePattern);
+validate("inputLastName2", namePattern);
+validate("inputPhone2", phonePattern);
+select("month2");
+select("day2");
+select("year2");

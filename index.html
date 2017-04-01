@@ -211,30 +211,30 @@
       </div>
       <div class="form-group has-feedback">
         <label for="inputConfirmPassword2">Confirm Password<span class="required"> *</span></label>
-        <input type="password" class="myInput2" id="inputConfirmPassword2" placeholder="paSSword22"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Please type the same password">
+        <input type="password" class="myInput2" id="inputConfirmPassword2" placeholder="paSSword22"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Please type the same password" disabled>
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
         <p class="error-text">The two passwords are not the same</p>
       </div>
       <div class="justifyContainer">
         <div class="form-group has-feedback firstName">
-          <label for="exampleInputFirstName2">First Name</label>
-          <input type="text" class="myInput2" id="exampleInputFirstName2" placeholder="Mickey" pattern="[A-Za-zА-Яа-яЁёІіЇїЄє]+" title="Should contain only letters">
+          <label for="inputFirstName2">First Name</label>
+          <input type="text" class="myInput2" id="inputFirstName2" placeholder="Mickey" pattern="[A-Za-zА-Яа-яЁёІіЇїЄє]+" title="Should contain only letters">
           <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
           <p class="error-text">Should contain only letters</p>
         </div>
         <div class="form-group has-feedback lastName">
-          <label for="exampleInputLastName2">Last Name</label>
-          <input type="text" class="myInput2" id="exampleInputLastName2" placeholder="Mouse" pattern="[A-Za-zА-Яа-яЁёІіЇїЄє]+" title="Should contain only letters">
+          <label for="inputLastName2">Last Name</label>
+          <input type="text" class="myInput2" id="inputLastName2" placeholder="Mouse" pattern="[A-Za-zА-Яа-яЁёІіЇїЄє]+" title="Should contain only letters">
           <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
           <p class="error-text">Should contain only letters</p>
         </div>
       </div>
       <div class="form-group has-feedback">
-        <label for="exampleInputPhone2">Phone Number</label>
-        <input type="tel" class="myInput2" id="exampleInputPhone2" placeholder="0930000911"
+        <label for="inputPhone2">Phone Number</label>
+        <input type="tel" class="myInput2" id="inputPhone2" placeholder="0930000911"
           pattern="[0-9]{10}" title="Must be 10 digits phone number">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
@@ -253,7 +253,7 @@
         <p class="myLable" title="Choose date of your birth">Date of Birth</p>
         <div class="justifyContainer">
           <div class="month">
-            <select class=" mySelect2" name="month2" title="Select a month">
+            <select class="mySelect2" id="month2" name="month2" title="Select a month">
             <option selected value="">month</option>
             <option value="1">January</option>
             <option value="2">February</option>
@@ -270,7 +270,7 @@
           </select>
           </div>
           <div class="day">
-            <select class="form-control mySelect2" name="day2" title="Select a day">
+            <select class="mySelect2" id="day2" name="day2" title="Select a day">
             <option value="" selected>day</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -306,7 +306,7 @@
           </select>
           </div>
           <div class="year">
-            <select class="form-control mySelect2" name="year2" title="Select a year">
+            <select class="mySelect2" id="year2" name="year2" title="Select a year">
              <option value="" selected>year</option>
             <option value="2001">2001</option>
             <option value="2000">2000</option>
