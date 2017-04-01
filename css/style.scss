@@ -1,3 +1,7 @@
+*:focus {
+    outline: none;
+}
+
 h1 {
   text-align: center;
   margin-bottom: 20px;
@@ -71,6 +75,7 @@ select {
 }
 
 .mySubmit {
+  outline: none !important;
   margin-top: 20px;
   opacity: 0.5;
 }
