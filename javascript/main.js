@@ -19,27 +19,65 @@ function ChangeValue() {
 function Empty(x) {
   return x.value.length > 0 ? false : true;
 }
+
 function Checked(x) {
- return x.checked === true ? true : false;
+  return x.checked === true ? true : false;
 }
+
 function Required(x) {
   if ( // choose required input field
-    x.id === "inputLogin2" || 
+    x.id === "inputLogin2" ||
     x.id === "inputEmail2" ||
     x.id === "inputPassword2" ||
     x.id === "inputConfirmPassword2" ||
-    x.id === "licenseAgreement2" 
-    ) {
-      return true;
-    } else {
-      return false;
-    }
+    x.id === "licenseAgreement2"
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 }
+
+function returnInitialErrorText(x) {
+  var initialText;
+  switch (x.id) {
+    case "inputLogin2":
+      initialText = "Should contain only letters and numbers";
+      break;
+    case "inputEmail2":
+      initialText = "Must be a valid email address";
+      break;
+    case "inputPassword2":
+      initialText = "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters";
+      break;
+    case "inputConfirmPassword2":
+      initialText = "The two passwords are not the same";
+      break;
+    case "inputFirstName2":
+      initialText = "Should contain only letters";
+      break;
+    case "inputLastName2":
+      initialText = "Should contain only letters";
+      break;
+    case "inputPhone2":
+      initialText = "The number is not complete";
+      break;
+  }
+  $(x).siblings(".error-text").text(initialText);
+}
+
+
+function showErrorEmptyInput(x) {
+  $(x).siblings(".error-text").text("Please fill out this field");
+  $(x).siblings(".error-text").css("visibility", "visible");
+}
+
 function showErrorCheckbox(x) {
- $(x).parent().siblings(".error-text").css("visibility", "visible");
+  $(x).parent().siblings(".error-text").css("visibility", "visible");
 }
+
 function hideErrorCheckbox(x) {
- $(x).parent().siblings(".error-text").css("visibility", "");
+  $(x).parent().siblings(".error-text").css("visibility", "");
 }
 var myCheckbox = document.getElementById("licenseAgreement2");
 myCheckbox.onchange = function () {
@@ -61,6 +99,7 @@ function ShowOnFocus(x) {
   $(x).siblings(".icon-error").css("display", "");
   $(x).siblings(".icon-success").css("display", "");
   $(x).siblings(".error-text").css("visibility", "");
+  returnInitialErrorText(x);
 }
 
 function CleanSuccessError(x) {
@@ -116,6 +155,7 @@ function validateIE(id, pattern) {
     ShowOnFocus(this);
   };
   x.onblur = function () {
+    alert(x.value);
     this.classList.remove("onfocus");
     var isValid = Valid(this, y);
     if (isValid) {
@@ -178,16 +218,24 @@ function select(id) {
     var isEmpty = Empty(this);
     if (!isEmpty) {
       $(x).addClass("success");
-    } 
+    }
   };
 }
 
-function changePhoneInput () {
-  var phone = [{ "mask": "+38 (###) ###-##-##"}];
-    $('#inputPhone2').inputmask({ 
-        mask: phone, 
-        greedy: false, 
-        definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+function changePhoneInput() {
+  var phone = [{
+    "mask": "+38 (###) ###-##-##"
+  }];
+  $('#inputPhone2').inputmask({
+    mask: phone,
+    greedy: false,
+    definitions: {
+      '#': {
+        validator: "[0-9]",
+        cardinality: 1
+      }
+    }
+  });
 }
 changePhoneInput();
 
@@ -203,11 +251,14 @@ validate("inputPassword2", passwordPattern);
 confirm("inputPassword2", "inputConfirmPassword2");
 validate("inputFirstName2", namePattern);
 validate("inputLastName2", namePattern);
-if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
-  validateIE("inputPhone2", phonePattern);
-} else {
-  validate("inputPhone2", phonePattern);
-}
+validate("inputPhone2", phonePattern);
+
+// if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+//   validateIE("inputPhone2", phonePattern);
+// } else {
+//   validate("inputPhone2", phonePattern);
+// }
+
 select("month2");
 select("day2");
 select("year2");
@@ -219,6 +270,68 @@ select("year2");
 
 
 //ONSUBMIT VALIDATION
+
+function Valid2(x) {
+  var pattern;
+  switch (x.id) {
+    case "inputLogin2":
+      pattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє0-9]+$/;
+      break;
+    case "inputEmail2":
+      pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+      break;
+    case "inputPassword2":
+      pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+      break;
+    case "inputFirstName2":
+      pattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/;
+      break;
+    case "inputLastName2":
+      pattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/;
+      break;
+    case "inputPhone2":
+      pattern = /^[^_]+$/;
+      break;
+  }
+  if (Valid(x, pattern)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+function Valid3(id1, id2) {
+  var xValue = document.getElementById(id1).value;
+  var yValue = document.getElementById(id2).value;
+  return xValue === yValue ? true : false;
+}
+
+
+
+
+function InputsOK() {
+  var inputs = document.querySelectorAll("#inputLogin2, #inputEmail2, #inputPassword2, #inputConfirmPassword2, #inputFirstName2, #inputLastName2, #inputPhone2");
+  for (var i = 0; i < inputs.length; i++) {
+    var isEmpty = Empty(inputs[i]);
+    var isRequired = Required(inputs[i]);
+    var isValid;
+    if (inputs[i].id === "inputConfirmPassword2") {
+      isValid = Valid3("inputPassword2", "inputConfirmPassword2");
+    } else if (inputs[i].id !== "inputConfirmPassword2") {
+      isValid = Valid2(inputs[i]);
+    }
+    // alert(inputs[i].id +" isEmpty "+ isEmpty +" isRequired "+ isRequired + " isValid " + isValid);
+    if (isEmpty && isRequired) {
+      showErrorEmptyInput(inputs[i]);
+      return false;
+    } else if (!isEmpty && isRequired && !isValid) {
+      return false;
+    } else if (!isEmpty && !isRequired && !isValid) {
+      return false;
+    }
+  }
+}
 
 function CheckboxesOK() {
   var checkboxes = document.querySelectorAll("#licenseAgreement2");
@@ -232,79 +345,52 @@ function CheckboxesOK() {
   }
 }
 
-function Valid2(x) {
-  var pattern;
-  switch(x.id) {
-    case "inputLogin2":
-    pattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє0-9]+$/;
-    break;
-    case "inputEmail2":
-    pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
-    break;
-    case "inputPassword2":
-    pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    break;
-    case "inputFirstName2":
-    pattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/;
-    break;
-    case "inputLastName2":
-    pattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/;
-    break;
-    case "inputPhone2":
-    pattern = /^[^_]+$/;
-    break;
-  }
-  if (Valid(x, pattern)) {
-    return true;
-  } else {
-    return false;
-  }  
-}
 
-
-
-
-function InputsOK() {
-  var inputs = document.querySelectorAll("#inputLogin2, #inputEmail2, #inputPassword2,  inputFirstName2, #inputLastName2, #inputPhone2");
+function clearErrorEmptyInput() {
+  var inputs = document.querySelectorAll("#inputLogin2, #inputEmail2, #inputPassword2, #inputConfirmPassword2, #inputFirstName2, #inputLastName2, #inputPhone2");
   for (var i = 0; i < inputs.length; i++) {
-    var isEmpty = Empty(inputs[i]);
-    var isRequired = Required(inputs[i]);
-    var isValid = Valid2(inputs[i]);
-    alert(isEmpty +" "+ isRequired + " " + isValid);
-
-    // if (isEmpty && isRequired) {
-      
-    //   return false;
-    // }
-
-  
-
-
-    // if (Empty(x[i]) === true) {
-    //   formIsValid = false;
-    // }
+    var input = inputs[i];
+    var text = $(input).siblings(".error-text").text();
+    if (text === "Please fill out this field") {
+      $(input).siblings(".error-text").css("visibility", "hidden");
+    }
   }
 }
+
+function clearErrorCheckbox() {
+  var checkboxes = document.querySelectorAll("#licenseAgreement2");
+  for (var i = 0; i < checkboxes.length; i++) {
+    var checkbox = checkboxes[i];
+    var text = $(checkbox).parent().siblings(".error-text").text();
+    if (text === "Please check this box if you want to proceed") {
+      $(checkbox).parent().siblings(".error-text").css("visibility", "hidden");
+    }
+  }
+}
+
 
 
 var jsForm = document.getElementsByClassName('jsform')[0];
 jsForm.onsubmit = function (e) {
- var formIsValid = true;
- if ( CheckboxesOK() === false) {
-   formIsValid = false;
- }
+  var formIsValid = true;
+  clearErrorEmptyInput();
+  clearErrorCheckbox();
 
- if(!formIsValid) {
-   (e).preventDefault();
-   alert("bad");
- } else {
-   alert("Form was successfully submitted");
- }
+  if (InputsOK() === false || CheckboxesOK() === false) {
+    formIsValid = false;
+  }
+
+  if (!formIsValid) {
+    (e).preventDefault();
+    //  alert("bad");
+  } else {
+    alert("Form was successfully submitted!");
+  }
 };
 
 
 //TEST
 document.getElementById("click").onclick = function () {
- InputsOK();
+  //  alert(InputsOK());
+  clearErrorEmptyInput();
 };
-
