@@ -15,93 +15,42 @@ function ChangeValue() {
 
 // ------------JavaScript Validation------------
 
-
-
-// function ChangeBorderColorOnFocus() {
-//   var x = document.querySelectorAll(".myInput2, .mySelect2");
-//   // var x = document.getElementsByClassName("myInput2");
-//   for (var i = 0; i < x.length - 1; i++) {
-//     x[i].onfocus = function () {
-//       this.classList.remove("error");
-//       this.classList.remove("success");
-//       this.classList.add("onfocus");
-//     };
-//     x[i].onblur = function () {
-//       this.classList.remove("onfocus");
-//     };
-//   }
-// }
-// ChangeBorderColorOnFocus();
-
-// document.getElementsByClassName("jsform")[0].onsubmit = function () {
-// };
-
-// function myInput(id, pattern, required) {
-//   this.id = id;
-//   this.pattern = pattern;
-//   this.required = required;
-//   this.empty = function () {
-//     var x = document.getElementById(id);
-//     return x.value.length > 0 ? false : true;
-//   };
-//   this.validate = function () {
-//     var x = document.getElementById(id);
-//     return this.pattern.test(x.value);
-//   };
-
-//   this.onblur = function () {
-//     if (this.validate() === true && this.empty() === false) {
-//       this.classList.remove("error");
-//       this.classList.add("success");
-//     } else if (this.validate() === false && this.empty() === false) {
-//       this.classList.remove("success");
-//       this.classList.add("error");
-//     }
-//   };
-
-
-//   this.showSuccessOrError = function () {
-//     var x = document.getElementById(id);
-//     if (this.validate() === true && this.empty() === false) {
-//       this.classList.remove("error");
-//       this.classList.add("success");
-//     } else if (this.validate() === false && this.empty() === false) {
-//       this.classList.remove("success");
-//       this.classList.add("error");
-//     }
-//   };
-
-//   this.showSuccessOrErrorOnSubmit = function () {
-//     var x = document.getElementById(id);
-//     if (this.validate() === true && this.empty() === false) {
-
-//       x.classList.remove("error");
-//       x.classList.add("success");
-//     } else if (this.validate() === false && this.empty() === false) {
-//       x.classList.remove("success");
-//       x.classList.add("error");
-//     }
-//   };
-
-//   this.showClear = function () {
-
-//   };
-
-// }
-
-
-//TEST
-document.getElementById("click").onclick = function () {
-  var x = document.getElementById("inputPhone2").value;
-  alert(x);
-};
-
-
+//GENERAL FUNCTIONS
 function Empty(x) {
   return x.value.length > 0 ? false : true;
 }
+function Checked(x) {
+ return x.checked === true ? true : false;
+}
+function Required(x) {
+  if ( // choose required input field
+    x.id === "inputLogin2" || 
+    x.id === "inputEmail2" ||
+    x.id === "inputPassword2" ||
+    x.id === "inputConfirmPassword2" ||
+    x.id === "licenseAgreement2" 
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+}
+function showErrorCheckbox(x) {
+ $(x).parent().siblings(".error-text").css("visibility", "visible");
+}
+function hideErrorCheckbox(x) {
+ $(x).parent().siblings(".error-text").css("visibility", "");
+}
+var myCheckbox = document.getElementById("licenseAgreement2");
+myCheckbox.onchange = function () {
+  if (Checked(this)) {
+    hideErrorCheckbox(this);
+  }
+};
 
-function Validate(x, pattern) {
+
+//ONBLUR VALIDATION
+function Valid(x, pattern) {
   return pattern.test(x.value);
 }
 
@@ -148,7 +97,7 @@ function validate(id, pattern) {
   x.onblur = function () {
     this.classList.remove("onfocus");
     var isEmpty = Empty(this);
-    var isValid = Validate(this, y);
+    var isValid = Valid(this, y);
     if (isValid && !isEmpty) {
       ShowSuccess(this);
       return true;
@@ -159,7 +108,6 @@ function validate(id, pattern) {
   };
 }
 
-
 //Since there is an issue with IE (it changes value of input to "+38 (___) ___-__-__" after onfocus event, other browsers keep the input clear), this function will be used only for IE
 function validateIE(id, pattern) {
   var x = document.getElementById(id);
@@ -169,7 +117,7 @@ function validateIE(id, pattern) {
   };
   x.onblur = function () {
     this.classList.remove("onfocus");
-    var isValid = Validate(this, y);
+    var isValid = Valid(this, y);
     if (isValid) {
       ShowSuccess(this);
       return true;
@@ -180,8 +128,6 @@ function validateIE(id, pattern) {
   };
 }
 
-
-
 function confirm(id1, id2) {
   // id1 = input with initial password
   // id2 = input with confirmation of initial password
@@ -191,7 +137,7 @@ function confirm(id1, id2) {
     var xValue = document.getElementById(id1).value;
     var yValue = document.getElementById(id2).value;
     var isEmpty = Empty(y);
-    var xValid = Validate(this, passwordPattern);
+    var xValid = Valid(this, passwordPattern);
     if (xValid) {
       y.disabled = false;
       if (yValue === xValue && !isEmpty) {
@@ -236,6 +182,14 @@ function select(id) {
   };
 }
 
+function changePhoneInput () {
+  var phone = [{ "mask": "+38 (###) ###-##-##"}];
+    $('#inputPhone2').inputmask({ 
+        mask: phone, 
+        greedy: false, 
+        definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+}
+changePhoneInput();
 
 var loginPattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє0-9]+$/;
 var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
@@ -254,16 +208,103 @@ if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
 } else {
   validate("inputPhone2", phonePattern);
 }
-  
 select("month2");
 select("day2");
 select("year2");
 
-function changePhoneInput () {
-  var phone = [{ "mask": "+38 (###) ###-##-##"}];
-    $('#inputPhone2').inputmask({ 
-        mask: phone, 
-        greedy: false, 
-        definitions: { '#': { validator: "[0-9]", cardinality: 1}} });
+
+
+
+
+
+
+//ONSUBMIT VALIDATION
+
+function CheckboxesOK() {
+  var checkboxes = document.querySelectorAll("#licenseAgreement2");
+  for (var i = 0; i < checkboxes.length; i++) {
+    var isChecked = Checked(checkboxes[i]);
+    var isRequired = Required(checkboxes[i]);
+    if (!isChecked && isRequired) {
+      showErrorCheckbox(checkboxes[i]);
+      return false;
+    }
+  }
 }
-changePhoneInput();
+
+function Valid2(x) {
+  var pattern;
+  switch(x.id) {
+    case "inputLogin2":
+    pattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє0-9]+$/;
+    break;
+    case "inputEmail2":
+    pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+    break;
+    case "inputPassword2":
+    pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    break;
+    case "inputFirstName2":
+    pattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/;
+    break;
+    case "inputLastName2":
+    pattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/;
+    break;
+    case "inputPhone2":
+    pattern = /^[^_]+$/;
+    break;
+  }
+  if (Valid(x, pattern)) {
+    return true;
+  } else {
+    return false;
+  }  
+}
+
+
+
+
+function InputsOK() {
+  var inputs = document.querySelectorAll("#inputLogin2, #inputEmail2, #inputPassword2,  inputFirstName2, #inputLastName2, #inputPhone2");
+  for (var i = 0; i < inputs.length; i++) {
+    var isEmpty = Empty(inputs[i]);
+    var isRequired = Required(inputs[i]);
+    var isValid = Valid2(inputs[i]);
+    alert(isEmpty +" "+ isRequired + " " + isValid);
+
+    // if (isEmpty && isRequired) {
+      
+    //   return false;
+    // }
+
+  
+
+
+    // if (Empty(x[i]) === true) {
+    //   formIsValid = false;
+    // }
+  }
+}
+
+
+var jsForm = document.getElementsByClassName('jsform')[0];
+jsForm.onsubmit = function (e) {
+ var formIsValid = true;
+ if ( CheckboxesOK() === false) {
+   formIsValid = false;
+ }
+
+ if(!formIsValid) {
+   (e).preventDefault();
+   alert("bad");
+ } else {
+   alert("Form was successfully submitted");
+ }
+};
+
+
+//TEST
+document.getElementById("click").onclick = function () {
+ InputsOK();
+};
+

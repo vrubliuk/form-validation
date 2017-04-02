@@ -181,6 +181,7 @@
         <label>
           <input type="checkbox" required>I accept <a href="#">License agreement</a><span class="required"> *</span>
         </label>
+        <p class="error-text">Please check this box if you want to proceed</p>
       </div>
       <button type="submit" class="btn btn-default mySubmit">Submit</button>
     </form>
@@ -196,7 +197,7 @@
       </div>
       <div class="form-group has-feedback">
         <label for="inputEmail2">Email<span class="required"> *</span></label>
-        <input type="email" class="myInput2" id="inputEmail2" placeholder="mickey@gmail.com"
+        <input type="text" class="myInput2" id="inputEmail2" placeholder="mickey@gmail.com"
            title="Must be a valid email address">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
@@ -235,7 +236,7 @@
       <div class="form-group has-feedback">
         <label for="inputPhone2">Phone Number</label>
         <input type="tel" class="myInput2" id="inputPhone2" placeholder="+38 (___) ___-__-__"
-           title="Must be 10 digits phone number">
+           title="Must be valid phone number">
         <span class="glyphicon glyphicon-ok form-control-feedback icon-success" aria-hidden="true"></span>
         <span class="glyphicon glyphicon-remove form-control-feedback icon-error" aria-hidden="true"></span>
         <p class="error-text">The number is not complete</p>
@@ -348,8 +349,9 @@
 
       <div class="checkbox">
         <label>
-          <input type="checkbox">I accept <a href="#">License agreement</a><span class="required"> *</span>
+          <input type="checkbox" id="licenseAgreement2">I accept <a href="#">License agreement</a><span class="required"> *</span>
         </label>
+        <p class="error-text">Please check this box if you want to proceed</p>
       </div>
       <button type="submit" class="btn btn-default mySubmit">Submit</button>
     </form>
