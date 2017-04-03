@@ -1,6 +1,7 @@
 window.onload = function () {
   ChangeValue();
 };
+
 // ------------HTML5 Validation------------
 // Since placeholder-shown pseudo class doesn't work in IE and Edge, the value of each input will be changed dynamically via JS
 function ChangeValue() {
@@ -12,20 +13,23 @@ function ChangeValue() {
   }
 }
 
-
 // ------------JavaScript Validation------------
 
 //GENERAL FUNCTIONS
+
+// check if input is empty; return true or false
 function Empty(x) {
   return x.value.length > 0 ? false : true;
 }
 
+// check if checkbox is checked; return true or false
 function Checked(x) {
   return x.checked === true ? true : false;
 }
 
+// check if input is required; return true or false; you can add required input fields in body of this function
 function Required(x) {
-  if ( // choose required input field
+  if (
     x.id === "inputLogin2" ||
     x.id === "inputEmail2" ||
     x.id === "inputPassword2" ||
@@ -38,6 +42,7 @@ function Required(x) {
   }
 }
 
+// return initial error text after it is changed with "Please fill out this field"
 function returnInitialErrorText(x) {
   var initialText;
   switch (x.id) {
@@ -66,19 +71,21 @@ function returnInitialErrorText(x) {
   $(x).siblings(".error-text").text(initialText);
 }
 
-
+// show "Please fill out this field" input error on submit event
 function showErrorEmptyInput(x) {
   $(x).siblings(".error-text").text("Please fill out this field");
   $(x).siblings(".error-text").css("visibility", "visible");
 }
 
+// show "Please check this box if you want to proceed"" initial checkbox error on submit event
 function showErrorCheckbox(x) {
   $(x).parent().siblings(".error-text").css("visibility", "visible");
 }
-
+// hide "Please check this box if you want to proceed"" initial checkbox error on start of submit event
 function hideErrorCheckbox(x) {
   $(x).parent().siblings(".error-text").css("visibility", "");
 }
+// hide checkbox error if it is checked on change event
 var myCheckbox = document.getElementById("licenseAgreement2");
 myCheckbox.onchange = function () {
   if (Checked(this)) {
@@ -86,12 +93,13 @@ myCheckbox.onchange = function () {
   }
 };
 
+//------------------------ONBLUR VALIDATION---------------------------
 
-//ONBLUR VALIDATION
+// check if input is valid; return true or false; used only on blur event
 function Valid(x, pattern) {
   return pattern.test(x.value);
 }
-
+// change appearance of input field on focus (hide all errors, add blue border)
 function ShowOnFocus(x) {
   $(x).removeClass("error");
   $(x).removeClass("success");
@@ -102,6 +110,7 @@ function ShowOnFocus(x) {
   returnInitialErrorText(x);
 }
 
+// used only for password confirmation field; clean the input field
 function CleanSuccessError(x) {
   $(x).removeClass("error");
   $(x).removeClass("success");
@@ -111,6 +120,7 @@ function CleanSuccessError(x) {
   x.value = "";
 }
 
+// change appearance of input field if it is filled out correctly
 function ShowSuccess(x) {
   $(x).removeClass("error");
   $(x).addClass("success");
@@ -119,6 +129,7 @@ function ShowSuccess(x) {
   $(x).siblings(".error-text").css("visibility", "");
 }
 
+// change appearance of input field if it is filled out incorrectly
 function ShowError(x) {
   $(x).removeClass("success");
   $(x).addClass("error");
@@ -127,6 +138,7 @@ function ShowError(x) {
   $(x).siblings(".error-text").css("visibility", "visible");
 }
 
+// validate input field on blur event (show error or success); return standart appearance on focus event
 function validate(id, pattern) {
   var x = document.getElementById(id);
   var y = pattern;
@@ -147,30 +159,41 @@ function validate(id, pattern) {
   };
 }
 
-//Since there is an issue with IE (it changes value of input to "+38 (___) ___-__-__" after onfocus event, other browsers keep the input clear), this function will be used only for IE
-function validateIE(id, pattern) {
-  var x = document.getElementById(id);
-  var y = pattern;
-  x.onfocus = function () {
-    ShowOnFocus(this);
-  };
-  x.onblur = function () {
-    alert(x.value);
-    this.classList.remove("onfocus");
-    var isValid = Valid(this, y);
-    if (isValid) {
-      ShowSuccess(this);
-      return true;
-    } else if (!isValid && (x.value !== "+38 (___) ___-__-__")) {
-      ShowError(this);
-      return false;
-    }
-  };
-}
+// ------------------------------------------------------------------
+//sometimes there is an issue with IE (it changes value of input to "+38 (___) ___-__-__" after onfocus event, other browsers keep the input clear), this function is only for IE
+//since now it is working good, the function is not in use
 
+// function validateIE(id, pattern) {
+//   var x = document.getElementById(id);
+//   var y = pattern;
+//   x.onfocus = function () {
+//     ShowOnFocus(this);
+//   };
+//   x.onblur = function () {
+//     alert(x.value);
+//     this.classList.remove("onfocus");
+//     var isValid = Valid(this, y);
+//     if (isValid) {
+//       ShowSuccess(this);
+//       return true;
+//     } else if (!isValid && (x.value !== "+38 (___) ___-__-__")) {
+//       ShowError(this);
+//       return false;
+//     }
+//   };
+// }
+
+// if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+//   validateIE("inputPhone2", phonePattern);
+// } else {
+//   validate("inputPhone2", phonePattern);
+// } 
+// ------------------------------------------------------------------
+
+// check if initial password is valid; enable the confirmation input field and check if it is the same as initial password
+// id1 = input with initial password
+// id2 = input with confirmation of initial password
 function confirm(id1, id2) {
-  // id1 = input with initial password
-  // id2 = input with confirmation of initial password
   var x = document.getElementById(id1);
   var y = document.getElementById(id2);
   x.onkeyup = function () {
@@ -207,6 +230,7 @@ function confirm(id1, id2) {
   };
 }
 
+// change appearance of select field if something was selected
 function select(id) {
   var x = document.getElementById(id);
   x.onfocus = function () {
@@ -222,6 +246,7 @@ function select(id) {
   };
 }
 
+// launch jquery plugin "INPUT MASK" for phone input field
 function changePhoneInput() {
   var phone = [{
     "mask": "+38 (###) ###-##-##"
@@ -239,12 +264,14 @@ function changePhoneInput() {
 }
 changePhoneInput();
 
+// store patterns in variables
 var loginPattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє0-9]+$/;
 var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
 var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 var namePattern = /^[A-Za-zА-Яа-яЁёІіЇїЄє]+$/;
 var phonePattern = /^[^_]+$/;
 
+// launch functions for inputs
 validate("inputLogin2", loginPattern);
 validate("inputEmail2", emailPattern);
 validate("inputPassword2", passwordPattern);
@@ -252,25 +279,13 @@ confirm("inputPassword2", "inputConfirmPassword2");
 validate("inputFirstName2", namePattern);
 validate("inputLastName2", namePattern);
 validate("inputPhone2", phonePattern);
-
-// if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
-//   validateIE("inputPhone2", phonePattern);
-// } else {
-//   validate("inputPhone2", phonePattern);
-// }
-
 select("month2");
 select("day2");
 select("year2");
 
+//-------------ONSUBMIT VALIDATION----------------
 
-
-
-
-
-
-//ONSUBMIT VALIDATION
-
+// check if input is valid; return true or false; need only element at input
 function Valid2(x) {
   var pattern;
   switch (x.id) {
@@ -300,16 +315,14 @@ function Valid2(x) {
   }
 }
 
-
+// check if initial password and confirmation password are the same; return true or false
 function Valid3(id1, id2) {
   var xValue = document.getElementById(id1).value;
   var yValue = document.getElementById(id2).value;
   return xValue === yValue ? true : false;
 }
 
-
-
-
+// loop through all given inputs; show different types of errors; can return only false, if something is incorrect
 function InputsOK() {
   var inputs = document.querySelectorAll("#inputLogin2, #inputEmail2, #inputPassword2, #inputConfirmPassword2, #inputFirstName2, #inputLastName2, #inputPhone2");
   for (var i = 0; i < inputs.length; i++) {
@@ -321,7 +334,6 @@ function InputsOK() {
     } else if (inputs[i].id !== "inputConfirmPassword2") {
       isValid = Valid2(inputs[i]);
     }
-    // alert(inputs[i].id +" isEmpty "+ isEmpty +" isRequired "+ isRequired + " isValid " + isValid);
     if (isEmpty && isRequired) {
       showErrorEmptyInput(inputs[i]);
       return false;
@@ -333,6 +345,7 @@ function InputsOK() {
   }
 }
 
+// loop through all given checkboxes; show error; can return only false, if incorrect
 function CheckboxesOK() {
   var checkboxes = document.querySelectorAll("#licenseAgreement2");
   for (var i = 0; i < checkboxes.length; i++) {
@@ -345,7 +358,7 @@ function CheckboxesOK() {
   }
 }
 
-
+// clean "Please fill out this field" error for inputs; used on start of submit event to avoid repeat of error for few input field after each submit event; help to process validation step by step 
 function clearErrorEmptyInput() {
   var inputs = document.querySelectorAll("#inputLogin2, #inputEmail2, #inputPassword2, #inputConfirmPassword2, #inputFirstName2, #inputLastName2, #inputPhone2");
   for (var i = 0; i < inputs.length; i++) {
@@ -356,7 +369,7 @@ function clearErrorEmptyInput() {
     }
   }
 }
-
+// clean "Please check this box if you want to proceed" error for checkboxes; used on start of submit event to avoid repeat of error for few input field after each submit event; help to process validation step by step 
 function clearErrorCheckbox() {
   var checkboxes = document.querySelectorAll("#licenseAgreement2");
   for (var i = 0; i < checkboxes.length; i++) {
@@ -368,29 +381,18 @@ function clearErrorCheckbox() {
   }
 }
 
-
-
+// launch validation on submit event
 var jsForm = document.getElementsByClassName('jsform')[0];
 jsForm.onsubmit = function (e) {
   var formIsValid = true;
   clearErrorEmptyInput();
   clearErrorCheckbox();
-
   if (InputsOK() === false || CheckboxesOK() === false) {
     formIsValid = false;
   }
-
   if (!formIsValid) {
     (e).preventDefault();
-    //  alert("bad");
   } else {
     alert("Form was successfully submitted!");
   }
-};
-
-
-//TEST
-document.getElementById("click").onclick = function () {
-  //  alert(InputsOK());
-  clearErrorEmptyInput();
 };
