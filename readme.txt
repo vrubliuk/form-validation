@@ -1,3 +1,3 @@
 Form validation
 
-Available soon on: https://vrubliuk.github.io/form-validation/
+Available on: https://vrubliuk.github.io/form-validation/
